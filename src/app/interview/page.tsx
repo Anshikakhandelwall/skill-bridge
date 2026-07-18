@@ -1,0 +1,1 @@
+export default function InterviewPage() { return <section className="p-8"><h1 className="text-3xl font-semibold">Interview practice</h1><p className="mt-2 text-slate-400">Mock interviews will live here.</p></section>; }

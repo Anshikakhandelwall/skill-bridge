@@ -1,0 +1,1 @@
+export default function ProjectsPage() { return <section className="p-8"><h1 className="text-3xl font-semibold">Projects</h1><p className="mt-2 text-slate-400">Portfolio project recommendations will live here.</p></section>; }

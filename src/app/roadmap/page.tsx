@@ -1,0 +1,1 @@
+export default function RoadmapPage() { return <section className="p-8"><h1 className="text-3xl font-semibold">Career roadmap</h1><p className="mt-2 text-slate-400">Your adaptive milestones will live here.</p></section>; }
