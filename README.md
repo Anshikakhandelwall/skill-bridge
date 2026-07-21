@@ -1,45 +1,120 @@
 # SkillBridge AI
 
-**An AI Career Operating System.** SkillBridge builds a living **Career Twin** for each student — an evidence-based model of their real skills, built from their resume, GitHub repositories, completed projects, and mock interviews — and uses it to generate and continuously adapt a personalized roadmap toward a target role.
+**An AI Career Operating System.**
 
-Nothing here is a chatbot. Every AI call is a structured-output agent with a Zod-validated schema, sitting behind deterministic engines that do the actual math (skill gaps, readiness scoring, evidence merging). Agents propose; deterministic code decides what gets written to the database.
+SkillBridge AI builds a living **Career Twin** for each student—an evidence-based model of their real skills, built from their resume, GitHub repositories, completed projects, assessments, and mock interviews—and uses it to generate and continuously adapt a personalized roadmap toward a target role.
+
+Nothing here is just a chatbot. Every AI call is a structured-output agent with a Zod-validated schema, sitting behind deterministic engines that do the actual math: skill gaps, readiness scoring, and evidence merging.
+
+**Agents propose. Deterministic systems validate, decide, and persist.**
 
 ---
 
 ## What it does
 
-- **Resume Intelligence** — uploads a PDF resume, extracts text, and separates *claimed* skills from *demonstrated* ones with cited evidence.
-- **GitHub Evidence Engine** — analyzes a student's public repositories (no OAuth) to find real, demonstrated skills, citing actual repo names as evidence.
-- **Career Readiness Engine** — a deterministic formula combining role-competency weights, required skill levels, and evidence-weighted current levels into a single 0–100 readiness score.
-- **Career Planner** — generates a milestone-based roadmap from the student's actual skill gap matrix, not generic advice.
-- **Adaptive Roadmap Engine** — reacts to real events (a failed assessment, more weekly hours, a new GitHub skill, a completed project, a changed career goal) by patching the *affected* parts of the roadmap while preserving completed work, versioning every change.
-- **Project Coach** — turns the highest-priority skill gaps into a single portfolio-quality project plan (not a to-do app), complete with milestones, a README template, a resume bullet, and interview questions.
-- **Interview Agent** — generates a role-specific mock interview (technical/behavioral/project-discussion/follow-up questions), evaluates answers, and feeds weak competencies back into the roadmap.
-- **Event-driven architecture** — every meaningful action (`resume.analyzed`, `github.analyzed`, `roadmap.generated`, `roadmap.changed`, `assessment.completed/failed`, `project.completed`, `interview.completed`, …) is logged and can trigger adaptation through a single orchestrator.
+* **Resume Intelligence** — Uploads a PDF resume, extracts text, and separates *claimed* skills from *demonstrated* skills with cited evidence.
+* **GitHub Evidence Engine** — Analyzes a student's public repositories to find real, demonstrated skills, citing actual repository names as evidence.
+* **Career Readiness Engine** — Uses a deterministic formula combining role-competency weights, required skill levels, and evidence-weighted current levels to calculate a 0–100 readiness score.
+* **Career Planner** — Generates a milestone-based roadmap from the student's actual skill-gap matrix rather than generic career advice.
+* **Adaptive Roadmap Engine** — Reacts to real events such as a failed assessment, increased weekly hours, new GitHub evidence, completed projects, or a changed career goal. It patches affected parts of the roadmap while preserving completed work and versioning every change.
+* **Project Coach** — Converts the highest-priority skill gaps into a portfolio-quality project plan with milestones, README templates, resume bullets, and interview questions.
+* **Interview Agent** — Generates role-specific mock interviews with technical, behavioral, project-discussion, and follow-up questions, evaluates answers, and feeds weak competencies back into the Career Twin and roadmap.
+* **Event-driven architecture** — Meaningful actions such as `resume.analyzed`, `github.analyzed`, `roadmap.generated`, `roadmap.changed`, `assessment.completed`, `assessment.failed`, `project.completed`, and `interview.completed` are logged and can trigger adaptation through a single orchestrator.
 
 ---
 
-## Tech stack
+## Built with OpenAI Codex & GPT-5.6
 
-- **Next.js 15** (App Router, Turbopack), **React 19**, **TypeScript**
-- **Tailwind CSS 4**
-- **Supabase** — Postgres, Row Level Security, Auth (Google OAuth), Storage (resume PDFs)
-- **OpenAI Responses API** — structured outputs only, validated with **Zod** before anything touches the database
-- **lucide-react** for icons
+SkillBridge AI was developed using **OpenAI Codex powered by GPT-5.6** as an AI-assisted software engineering workflow.
 
-No other runtime dependencies were added beyond what a standard Next.js + Supabase + OpenAI app needs — celebrations/confetti, skeleton loaders, progress rings, and the interview radar chart are all hand-built (no charting or animation library).
+Instead of using AI only to generate isolated code snippets, we used Codex and GPT-5.6 throughout the development process as an **engineering partner** for designing, implementing, reviewing, and iterating on the complete system.
+
+The AI-assisted development workflow helped us:
+
+* Architect the **Career Twin** and evidence-based skill model.
+* Design the event-driven **Adaptive Career Engine**.
+* Implement specialized AI agents for resume analysis, GitHub analysis, project coaching, and interview evaluation.
+* Build structured-output pipelines using the OpenAI Responses API and Zod validation.
+* Design and implement Supabase database schemas and sequential migrations.
+* Develop evidence-ranking logic that prevents stronger skill evidence from being downgraded.
+* Integrate multiple independent features into a shared Career Twin architecture.
+* Review implementation decisions and identify opportunities to reuse existing deterministic engines instead of duplicating logic.
+* Debug TypeScript, Next.js, Supabase, authentication, and build issues during development.
+* Run iterative linting and production builds to verify that new phases integrated cleanly with the existing codebase.
+
+A key part of our workflow was treating GPT-5.6 and Codex not as a replacement for engineering judgment, but as an **AI development collaborator**. We provided architectural requirements, constraints, and existing implementation context, then used AI-assisted iteration to build and validate each feature while maintaining deterministic control over critical career calculations.
+
+This allowed us to move from a basic career-planning concept to a multi-agent, event-driven career operating system with a continuously evolving Career Twin.
 
 ---
 
-## Getting started
+## Tech Stack
 
-### 1. Create a Supabase project
-Go to [supabase.com](https://supabase.com), create a new project, and from **Project Settings → API** copy:
-- the **Project URL**
-- the **anon public key**
+### Frontend
 
-### 2. Run the database migrations
-In the Supabase **SQL Editor**, run every file in `supabase/migrations/` **in filename order** (they're timestamped, so alphabetical order is correct order). If you have the Supabase CLI:
+* **Next.js 15** — App Router and Turbopack
+* **React 19**
+* **TypeScript**
+* **Tailwind CSS 4**
+* **shadcn/ui**
+* **lucide-react**
+
+### Backend & Data
+
+* **Next.js Route Handlers**
+* **Supabase**
+* **PostgreSQL**
+* **Row Level Security (RLS)**
+* **Supabase Storage** for resume PDFs
+* **Supabase Authentication** with email/password authentication
+
+### AI & Intelligence
+
+* **OpenAI Responses API**
+* **GPT-5.6**
+* **OpenAI Codex** — AI-assisted software development
+* **Structured Outputs**
+* **Zod** — AI output validation
+* Specialized AI agents for:
+
+  * Resume Intelligence
+  * GitHub Evidence Analysis
+  * Career Planning
+  * Project Coaching
+  * Interview Generation and Evaluation
+  * Roadmap Adaptation
+
+### External APIs & Deployment
+
+* **GitHub REST API** — public repository evidence
+* **Vercel** — deployment
+
+No additional runtime dependencies were added beyond what the application requires. Visual features such as celebrations, confetti, skeleton loaders, progress rings, and the interview radar chart are implemented using lightweight custom components.
+
+---
+
+## Getting Started
+
+### 1. Create a Supabase Project
+
+Create a project in Supabase and obtain:
+
+* **Project URL**
+* **Publishable/Anon Public Key**
+
+These values are required for the application to communicate with Supabase.
+
+### 2. Run the Database Migrations
+
+The migrations are located in:
+
+```text
+supabase/migrations/
+```
+
+Run them in filename order. They are timestamped, so alphabetical order is the correct execution order.
+
+Using the Supabase CLI:
 
 ```bash
 supabase login
@@ -47,89 +122,203 @@ supabase link --project-ref <your-project-ref>
 supabase db push
 ```
 
-This creates all tables (with RLS enabled on every one) and the private `resumes` storage bucket.
+This creates the required database tables, Row Level Security policies, and storage configuration.
 
-### 3. Enable Google sign-in
-In Supabase **Authentication → Providers → Google**, enable it and add a Google OAuth Client ID/Secret (create one in Google Cloud Console → APIs & Credentials, redirect URI `https://<your-project-ref>.supabase.co/auth/v1/callback`). In **Authentication → URL Configuration**, add `http://localhost:3000/**` as a redirect URL for local dev.
+### 3. Configure Authentication
 
-### 4. Configure environment variables
-```bash
-cp .env.example .env.local
+SkillBridge AI uses **email/password authentication**.
+
+In your Supabase project:
+
+**Authentication → Providers → Email**
+
+Enable email authentication according to your desired confirmation settings.
+
+Under:
+
+**Authentication → URL Configuration**
+
+Configure the Site URL and Redirect URLs for local development and production.
+
+For local development:
+
+```text
+http://localhost:3000
 ```
-Fill in `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `OPENAI_API_KEY` at minimum. See `.env.example` for optional variables (a `GITHUB_TOKEN` to raise GitHub API rate limits, and per-agent model overrides).
 
-### 5. Install and run
+For production, add your deployed Vercel domain.
+
+### 4. Configure Environment Variables
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_publishable_or_anon_key
+OPENAI_API_KEY=your_openai_api_key
+```
+
+Optional variables may include:
+
+```env
+GITHUB_TOKEN=your_github_token
+```
+
+A GitHub token is optional and can be used to increase GitHub API rate limits.
+
+### 5. Install and Run
+
 ```bash
 npm install
 npm run dev
 ```
-Visit `http://localhost:3000`.
+
+Visit:
+
+```text
+http://localhost:3000
+```
 
 ---
 
 ## Deploying
 
-This is a standard Next.js app — deploy to **Vercel** (recommended) by importing the repo and adding the same environment variables from step 4 under Project Settings → Environment Variables. After the first deploy, update Supabase's **Site URL** and **Redirect URLs** to your real production domain.
+SkillBridge AI is a standard Next.js application and can be deployed to **Vercel**.
+
+1. Import the GitHub repository into Vercel.
+2. Add the required environment variables under **Project Settings → Environment Variables**.
+3. Deploy the application.
+4. Update Supabase **Site URL** and **Redirect URLs** with the production Vercel domain.
+5. Ensure the Supabase database migrations have been applied to the production project.
 
 ---
 
-## Available scripts
+## Available Scripts
 
 ```bash
-npm run dev     # start the dev server (Turbopack)
-npm run build   # production build
-npm run start   # run the production build
-npm run lint    # ESLint
+npm run dev     # Start the development server with Turbopack
+npm run build   # Create a production build
+npm run start   # Run the production build
+npm run lint    # Run ESLint
 ```
 
 ---
 
-## Project structure
+## Project Structure
 
-```
+```text
 src/
-  app/                    # routes (App Router)
-    dashboard/            # Career Twin overview, activity timeline, demo mode
-    resume/ analyze/       # resume upload + evidence breakdown
+  app/
+    dashboard/              # Career Twin overview and activity
+    resume/                 # Resume upload and intelligence
+    analyze/                # Resume analysis flow
     github/                 # GitHub evidence analysis
-    roadmap/                # generated roadmap + skill gap visualization
-    projects/                # Project Coach
-    interview/                # mock interview flow
-    api/                       # route handlers (see below)
+    roadmap/                # Adaptive roadmap and skill gaps
+    projects/               # AI Project Coach
+    interview/              # AI mock interview
+    login/                  # Email/password login
+    signup/                 # Email/password registration
+    api/                    # API route handlers
+
   components/
-    ui/                     # shared primitives (Button, ProgressRing, Skeleton, EmptyState, Celebration, ...)
-    dashboard/ roadmap/ resume/ github/ projects/ interview/ demo/
+    ui/                     # Shared UI primitives
+    dashboard/              # Dashboard components
+    roadmap/                # Roadmap components
+    resume/                 # Resume components
+    github/                 # GitHub components
+    projects/               # Project components
+    interview/              # Interview components
+    auth/                   # Authentication components
+    demo/                   # Demo and simulation components
+
   lib/
-    agents/                  # AI agents — Responses API + Zod, one file per agent
-    career/                  # deterministic engines: skill-gap, readiness-score,
-                              # adaptation-engine, orchestrator, events, assessment,
-                              # generate-roadmap, notifications, evidence-merge helpers
-    github/                   # GitHub REST API client (public data only)
-    resume/                    # PDF text extraction
-    supabase/                   # client/server Supabase helpers
-    validations/                 # Zod schemas for every AI agent's output
-  types/                          # shared TypeScript types
-supabase/migrations/               # timestamped, sequential SQL migrations
+    agents/                 # Structured-output AI agents
+    career/                 # Deterministic career intelligence engines
+    github/                 # GitHub REST API client
+    resume/                 # Resume text extraction
+    auth/                   # Authentication helpers
+    supabase/               # Supabase client/server helpers
+    validations/            # Zod validation schemas
+
+  types/                    # Shared TypeScript types
+
+supabase/
+  migrations/               # Timestamped sequential SQL migrations
 ```
 
-### API routes
+---
 
-| Route | Purpose |
-|---|---|
-| `POST /api/resume/upload`, `/extract`, `/analyze` | Resume Intelligence pipeline |
-| `POST /api/github/analyze` | GitHub Evidence Engine |
-| `POST /api/roadmap/generate` | Career Planner → new roadmap version |
-| `POST /api/assessments/start`, `/submit` | Skill assessments (feed evidence + adaptation) |
-| `POST /api/projects/generate`, `GET /api/projects`, `POST /api/projects/:id/complete` | Project Coach |
-| `POST /api/interviews/start`, `POST /api/interviews/:id/respond`, `GET /api/interviews` | Interview Agent |
-| `POST /api/demo/simulate` | Developer-only: triggers real events to demo live roadmap adaptation |
+## API Routes
 
-### Architecture principle
+| Route                              | Purpose                                      |
+| ---------------------------------- | -------------------------------------------- |
+| `POST /api/resume/upload`          | Upload a resume                              |
+| `POST /api/resume/extract`         | Extract resume text                          |
+| `POST /api/resume/analyze`         | Analyze resume evidence                      |
+| `POST /api/github/analyze`         | Analyze GitHub repositories                  |
+| `POST /api/roadmap/generate`       | Generate a personalized roadmap              |
+| `POST /api/assessments/start`      | Start a skill assessment                     |
+| `POST /api/assessments/submit`     | Submit assessment results                    |
+| `POST /api/projects/generate`      | Generate a portfolio project                 |
+| `GET /api/projects`                | Retrieve student projects                    |
+| `POST /api/projects/:id/complete`  | Complete a project and update evidence       |
+| `POST /api/interviews/start`       | Generate a mock interview                    |
+| `POST /api/interviews/:id/respond` | Evaluate interview responses                 |
+| `GET /api/interviews`              | Retrieve interview history                   |
+| `POST /api/demo/simulate`          | Developer-only roadmap adaptation simulation |
 
-Every feature follows the same pipeline:
+---
 
+## Architecture Principle
+
+Every major feature follows the same core pipeline:
+
+```text
+User Action / New Evidence
+          ↓
+        Event
+          ↓
+Deterministic Calculation
+          ↓
+   AI Agent Reasoning
+          ↓
+   Structured Output
+          ↓
+     Zod Validation
+          ↓
+ Deterministic Decision
+          ↓
+    Database Update
+          ↓
+   Career Twin Updated
+          ↓
+  Roadmap Adaptation
+          ↓
+       New UI State
 ```
-Event → deterministic calculation → AI agent (structured output) → Zod validation → database write → UI
-```
 
-The AI never writes to the database directly, and the roadmap adaptation logic lives in exactly one place (`src/lib/career/orchestrator.ts` + `adaptation-engine.ts`) that every trigger — assessments, GitHub sync, project completion, interviews, career goal changes — reuses rather than duplicates.
+The AI never writes directly to the database.
+
+AI agents are responsible for reasoning and proposing structured outputs. Deterministic code validates those outputs and controls critical operations such as evidence ranking, readiness calculations, skill-gap analysis, and roadmap adaptation.
+
+The roadmap adaptation logic is centralized in the career engine and reused across all triggers—including assessments, GitHub analysis, project completion, interviews, and career goal changes—rather than being duplicated across individual features.
+
+The result is a continuously evolving system:
+
+**Evidence → Career Twin → Skill Gap → Roadmap → Action → New Evidence → Adaptation**
+
+---
+
+## Vision
+
+Most career platforms tell students what they *could* learn.
+
+SkillBridge AI focuses on what they **actually know, what they can prove, what they are missing, and what they should do next**.
+
+Our long-term vision is to build an intelligent career operating system that continuously connects a student's real-world evidence to their career goals.
+
+> **SkillBridge AI doesn't give you a roadmap once. It continuously navigates with you until you're ready for where you want to go.**
+
+**SkillBridge AI — Your Career. Continuously Evolving.**
+
+developer-Anshika Khandelwal
