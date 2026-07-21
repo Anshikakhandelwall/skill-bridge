@@ -8,6 +8,7 @@ import { buildSmartNotifications } from "@/lib/career/notifications";
 import { DemoSimulationPanel } from "@/components/demo/demo-simulation-panel";
 import { CareerTwinPanel, type TwinSkill } from "@/components/dashboard/career-twin-panel";
 import { ProgressRing } from "@/components/ui/progress-ring";
+import { LogoutButton } from "@/components/auth/logout-button";
 import type { SkillGapEntry } from "@/lib/career/skill-gap";
 
 async function getNextRecommendedAction(
@@ -136,11 +137,14 @@ export default async function DashboardPage() {
               Every score here is backed by real evidence — resume, GitHub, projects, and interviews.
             </p>
           </div>
-          <Link href={nextAction.href} className="group hidden shrink-0 items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/5 px-4 py-2 text-sm font-medium text-cyan-100 transition hover:border-cyan-300/60 hover:bg-cyan-300/10 sm:flex">
-            <Rocket className="size-4" aria-hidden="true" />
-            {nextAction.label}
-            <ArrowRight className="size-3.5 transition group-hover:translate-x-0.5" aria-hidden="true" />
-          </Link>
+          <div className="flex shrink-0 flex-col items-end gap-2">
+            <Link href={nextAction.href} className="group hidden items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/5 px-4 py-2 text-sm font-medium text-cyan-100 transition hover:border-cyan-300/60 hover:bg-cyan-300/10 sm:flex">
+              <Rocket className="size-4" aria-hidden="true" />
+              {nextAction.label}
+              <ArrowRight className="size-3.5 transition group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
 
         {notifications.length > 0 && (

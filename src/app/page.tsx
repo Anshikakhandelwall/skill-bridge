@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Compass, Sparkles } from "lucide-react";
-import { LoginButton } from "@/components/auth/login-button";
 
 export default function Home() {
   return (
@@ -12,7 +11,17 @@ export default function Home() {
           </span>
           SkillBridge AI
         </Link>
-        <LoginButton />
+        <div className="flex items-center gap-3">
+          <Link className="text-sm font-medium text-slate-200 transition hover:text-cyan-200" href="/login">
+            Log in
+          </Link>
+          <Link
+            className="rounded-lg bg-cyan-300 px-4 py-2 text-sm font-medium text-slate-950 transition hover:bg-cyan-200"
+            href="/signup"
+          >
+            Sign up
+          </Link>
+        </div>
       </nav>
 
       <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-24 pt-20 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:pt-28">
@@ -28,7 +37,13 @@ export default function Home() {
             SkillBridge turns your current skills, goals, and available time into a focused path toward interview-ready proof.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
-            <div className="inline-flex items-center gap-2"><LoginButton /><ArrowRight className="size-4 text-cyan-200" aria-hidden="true" /></div>
+            <Link
+              className="inline-flex items-center gap-2 rounded-lg bg-cyan-300 px-5 py-3 font-medium text-slate-950 transition hover:bg-cyan-200"
+              href="/signup"
+            >
+              Get started
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
             <Link className="inline-flex items-center rounded-lg border border-slate-700 px-5 py-3 font-medium text-slate-100 transition hover:border-slate-500" href="/roadmap">
               Explore a roadmap
             </Link>
